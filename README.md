@@ -1,1 +1,1 @@
-# INFO3PRA
+# ChessInf3Pra
