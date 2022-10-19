@@ -50,12 +50,12 @@ void Schachbrett::execTurn(int startx,int starty, int zielx, int ziely){
 }
 bool Schachbrett::isB(char piece){
     if(piece<='a'|| piece>='z')
-        return false
+        return false;
     return true;
 }
 bool Schachbrett::isW(char piece){
     if(piece<='A'|| piece>='Z')
-        return false
+        return false;
     return true;
 }
 bool Schachbrett::isEmptySpace(char piece){
