@@ -20,3 +20,46 @@ void Schachbrett::print(){
 
 
 }
+bool checkDiagonal(int sx, int sy, int zx, int zy){
+  //(1,1) -> (5,5)
+  if(abs(sx-zx)==abs(sy-zy)){
+
+  }
+  return false;
+}
+   bool checkNESW(int sx, int sy, int zx, int zy){
+     return sx == zx ? true: sy==zy ? true: false ;
+
+
+
+   }
+   bool checkArea(int sx, int sy, int zx, int zy){
+       return (board[zx][zy]!='#' || board[zx][zy]!=' ') ;
+
+   }
+   bool checkKnight(int sx, int sy, int zx, int zy){
+     int g[] = {2, -2};
+     int ge[] = {1, -1};
+
+       for(int i=0; i<2; i++)
+	 for(int j=0; j< 2; j++)
+	     if ((sy + g[j])==zy && (sx +ge[i])==zx)
+		return true;
+       for(int i=0; i<2; i++)
+       	 for(int j=0; j< 2; j++)
+       	     if ((sx + g[j])==zx && (sy +ge[i])==zy)
+       		return true;
+
+     return false;
+   }
+   bool checkPawn(int sx, int sy, int zx, int zy){
+     //
+     if(sy==6 || sy==1 )
+	 ;
+     return;
+   }
+
+
+   bool isValid(int sx, int sy, int zx, int zy){
+     return;
+   }
