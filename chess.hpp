@@ -15,12 +15,12 @@ protected:
 
 public:
     Schachbrett();
-// F�llt das 2-dimensionale Feld sodass es dem Ausgangspunkt des Spiels entspricht.
+// Fuellt das 2-dimensionale Feld sodass es dem Ausgangspunkt des Spiels entspricht.
 
 
     void print();
 // Gibt den aktuellen Zustand des Bretts auf dem Bildschirm aus.
-// m�gliches Aussehen :
+// moegliches Aussehen :
 //
 //			8  t s l d k l s t
 //			7  b b b b b b b b
@@ -33,25 +33,25 @@ public:
 //			
 //			   a b c d e f g h
 //
-// zu beachten hierbei ist, dass das Feld r�ckw�rts ausgegeben wird.
+// zu beachten hierbei ist, dass das Feld rueckwaerts ausgegeben wird.
 // Die Nummerierungen sind nicht Teil des Feldes.
 
 
     void execTurn(int startx, int starty, int zielx, int ziely);
-// �berschreibt das Element in der Zielposition mit dem Inhalt der Startposition
+// ueberschreibt das Element in der Zielposition mit dem Inhalt der Startposition
 // Das Startfeld wird zur "leeren" Kachel
 
 
     bool isW(char piece);
-//�berpr�ft ob es sich bei dem char um eine wei�e Figur handelt.
+//ueberprueft ob es sich bei dem char um eine wei�e Figur handelt.
 
 
     bool isB(char piece);
-//�berpr�ft ob es sich bei dem char um eine schwarze Figur handelt.
+//ueberprueft ob es sich bei dem char um eine schwarze Figur handelt.
 
 
     bool isEmptySpace(char piece);
-//�berpr�ft ob es sich bei dem char um eine leere Kachel handelt.
+//ueberprueft ob es sich bei dem char um eine leere Kachel handelt.
 
 };
 
@@ -60,8 +60,8 @@ private:
     bool player_ = PLAYER1;
 
 // Die folgenden Funktionen Testen jeweils ob sich das Zielfeld mithilfe
-// der jeweiligen Zugoptionen erreichen l�sst.
-// Dabei muss darauf geachtet werden ob m�glicherweise eine Figur im Weg zum Zielfeld steht.
+// der jeweiligen Zugoptionen erreichen laesst.
+// Dabei muss darauf geachtet werden ob moeglicherweise eine Figur im Weg zum Zielfeld steht.
 
     bool checkDiagonal(int sx, int sy, int zx, int zy);
     bool checkNESW(int sx, int sy, int zx, int zy);
@@ -71,17 +71,17 @@ private:
 	
 
     bool isValid(int sx, int sy, int zx, int zy);
-// Hier wird erst gepr�ft ob board[sx][sy] eine Figur ist und ob sie von dem jeweiligen
+// Hier wird erst geprueft ob board[sx][sy] eine Figur ist und ob sie von dem jeweiligen
 // Spieler bewegt werden darf. 
 // Trifft das obige zu dann wird je nach Figur die richtige 'check-Methode'
-// ausgef�hrt.
+// ausgefuehrt.
 
 	void execTurn(int startx, int starty, int zielx, int ziely) throw(string);
-// wirft wenn das Zielfeld ein K�nig ist eine Nachricht welcher Spieler gewonnen hat.
+// wirft wenn das Zielfeld ein Koenig ist eine Nachricht welcher Spieler gewonnen hat.
 
 public:
 	void run();
-// F�hrt das Spiel aus und k�mmert sich um die Benutzereingabe.
+// Fuehrt das Spiel aus und kuemmert sich um die Benutzereingabe.
 
 };
 
