@@ -56,26 +56,30 @@ void Schachbrett::print(){
 
 //Finished
 bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
-  //First check start and end position color, if true then return false, this add as methode? //Catches also if the same place is tried to use (1,1) (1,1) => false
-            if(isEmptySpace(board[sx][sy]) || (isW(board[sx][sy])&&isW(board[zx][zy])) || (isB(board[sx][sy])&&isB(board[zx][zy]))) //Check is there a Figure to move // check same color
+//First check start and end position color, if true then return false, this add as methode? //Catches also if the same place is tried to use (1,1) (1,1) => false
+//Check is there a Figure to move // check same color
+	if(isEmptySpace(board[sx][sy]) || (isW(board[sx][sy])&&isW(board[zx][zy])) || (isB(board[sx][sy])&&isB(board[zx][zy]))) 
               return false;
 
 
-  //Check if Diagonal
-  if(abs(sx-zx)==abs(sy-zy)){
-      //Check if something betweeen
-      int g= sx<zx ? 1: -1;
-      int ge = sy<zy ? 1: -1;
-      for(int i=1; i<abs(sx-zx)-1; i++)		//-1 because of the first check and +1 because not the same field
-	if(!isEmptySpace(board[sx+(g*i)][sy+(ge*i)]))
-	  return false;
-
-  }
-  return false;
+//Check if diagonal
+//UPDATE: added a previously missing return statement in line 76 
+	if(abs(sx-zx)==abs(sy-zy)){
+	//Check if something betweeen
+		int g= sx<zx ? 1: -1;
+		int ge = sy<zy ? 1: -1;
+		//-1 because of the first check and +1 because not the same field
+		for(int i=1; i<abs(sx-zx)-1; i++)	
+			if(!isEmptySpace(board[sx+(g*i)][sy+(ge*i)]))
+				return false;
+		return true;
+	}
+	return false;
 };
-   // Finished
+// Finished
    bool Schachspiel::checkNESW(int sx, int sy, int zx, int zy){
-     //First check start and end position color, if true then return false, this add as methode? //Catches also if the same place is tried to use (1,1) (1,1) => false
+//First check start and end position color, if true then return false, this add as methode?
+//Catches also if the same place is tried to use (1,1) (1,1) => false
           if(isEmptySpace(board[sx][sy]) || (isW(board[sx][sy])&&isW(board[zx][zy])) || (isB(board[sx][sy])&&isB(board[zx][zy]))) //Check is there a Figure to move // check same color
             return false;
 

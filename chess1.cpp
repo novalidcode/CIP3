@@ -63,3 +63,67 @@ bool Schachbrett::isEmptySpace(char piece){
     if(piece == '#') return true;
     return false;
 }
+bool Schachspiel::isValid(int sx, int sy, int zx, int zy){
+	if(startx < 0 || startx >7 || zielx <0 || zielx >7) return false;
+    if(starty < 0 || starty >7 || ziely <0 || ziely >7) return false;
+    
+	if(isEmptySpace(board[sx][sy])) return false;
+	if(isW(board[sx][sy])^player_) return false;
+// Use of XOR in parentheses. Statement is true when the color of the piece doesnt match the player
+// Notice that this statement can also be false if the piece was empty
+// Therefore you have to first make sure that the piece isnt an empty space
+	switch(board[sx][sy]){
+		case 'b': case 'B':	return checkPawn( sx,  sy,  zx,  zy);
+			break;
+		case 't': case 'T': return checkNESW( sx,  sy,  zx,  zy);
+			break;
+		case 'l': case 'L': return checkDiagonal( sx,  sy,  zx,  zy);
+			break;
+		case 's': case 'S': return checkKnight( sx,  sy,  zx,  zy);
+			break;
+		case 'd': case 'D':	return(checkDiagonal( sx,  sy,  zx,  zy)||checkNESW( sx,  sy,  zx,  zy));
+			break;
+		case 'k': case 'K': return checkArea( sx,  sy,  zx,  zy);
+			break;
+		default: throw(string("ERROR"));
+			break;
+	}
+	return false;
+}
+
+void Schachspiel::execTurn(int startx, int starty, int zielx, int ziely){
+	if (board[zielx][ziely]== 'K') throw string("Spieler2 hat gewonnen.");
+	if (board[zielx][ziely]== 'k') throw string("Spieler1 hat gewonnen.");
+	Schachbrett::execTurn(startx, starty, zielx, ziely);
+	return;
+}
+void Schachspiel::run(){
+	int sy,zy;
+	char sx,zx;	
+	while(1){
+		do{
+			cout << "Eingabe Startkoordinaten:";
+			
+			cin >> sx >> sy;
+			if(cin.fail()){
+				cin.clear();
+				cout << "FEHLER" << endl;
+				cin.ignore(1000,'\n');
+				continue;
+			}
+
+			cout << "Eingabe Zielkoordinaten:";
+			cin >> zx >> zy;
+			if(cin.fail()){
+				cin.clear();
+				cout << "FEHLER" << endl;
+				cin.ignore(1000,'\n');
+				continue;
+			}
+			if(!isValid(((int)sx)-61,sy-1,((int)zx)-61,zy-1))
+				cout << "ungültiger Zug" << endl;
+		}while(!isValid(((int)sx)-61,sy-1,((int)zx)-61,zy-1));
+		execTurn(((int)sx)-61,sy-1,((int)zx)-61,zy-1);
+	}
+	return;
+}	

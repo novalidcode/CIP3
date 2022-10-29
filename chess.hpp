@@ -1,12 +1,13 @@
 #ifndef CHESS_HPP_INCLUDED
 #define CHESS_HPP_INCLUDED
 
-#define PLAYER1 1
-#define PLAYER2 0
+#define PLAYER1 true
+//PLAYER1 controlls the white pieces
+#define PLAYER2 false
+//PLAYER2 controlls the black pieces
 
 #include <iostream>
 using namespace std;
-
 
 class Schachbrett{
 
@@ -21,6 +22,8 @@ public:
     void print();
 // Gibt den aktuellen Zustand des Bretts auf dem Bildschirm aus.
 // moegliches Aussehen :
+//		Grossbuchstaben -> weiß
+//		Kleinbuchstaben -> schwarz
 //
 //			8  t s l d k l s t
 //			7  b b b b b b b b
