@@ -64,7 +64,10 @@ bool Schachbrett::isEmptySpace(char piece){
     return false;
 }
 bool Schachspiel::isValid(int sx, int sy, int zx, int zy){
-	if(startx < 0 || startx >7 || zielx <0 || zielx >7) return false;
+	if(startx < 0 || startx >7 || zielx <0 || zielx >7){
+		cout << "ERROR: coordinates out of range." << endl;
+	   	return false;
+	}
     if(starty < 0 || starty >7 || ziely <0 || ziely >7) return false;
     
 	if(isEmptySpace(board[sx][sy])) return false;
