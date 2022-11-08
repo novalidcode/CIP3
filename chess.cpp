@@ -1,14 +1,14 @@
 #include "chess.hpp"
 
 /*
- * 	Schachspiel::checkArea almost finished
+ * 	ChessEngine::checkArea almost finished
  * 		castling & attackedField
  *
- * 	Schachspiel::checkPawn almost finished
+ * 	ChessEngine::checkPawn almost finished
  * 		en passant
  * 		upgradePawn => Queen, Roook, Knight or Bishop when reached other side
  *
- *	Schachspiel::isValid not implemented here
+ *	ChessEngine::isValid not implemented here
  *
  * 	methode needed bool checkProtectKing(int sx, int sy){ } //Checks if the King is protected by a Figure, needs to be checked for all
  * 	maybe just put it just inside the isvalid methode?
@@ -38,12 +38,12 @@
 
 
 //Finished
-void Schachbrett::print(){
+void ChessSimple::print(){
 
   for(int i=7;i>-1; i--){
 	cout <<i+1<<"  ";
       for(int j=0;j<8;j++){
-	  cout <<board[j][i]<<" ";
+	  cout << convert(board[j][i]) <<" ";
 
       }
       if(i==0)
@@ -55,7 +55,7 @@ void Schachbrett::print(){
 };
 
 //Finished
-bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
+bool ChessEngine::checkDiagonal(int sx, int sy, int zx, int zy){
 //First check start and end position color, if true then return false, this add as methode? //Catches also if the same place is tried to use (1,1) (1,1) => false
 //Check is there a Figure to move // check same color
 	if(isEmptySpace(board[sx][sy]) || (isW(board[sx][sy])&&isW(board[zx][zy])) || (isB(board[sx][sy])&&isB(board[zx][zy]))) 
@@ -77,7 +77,7 @@ bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
 	return false;
 };
 // Finished
-   bool Schachspiel::checkNESW(int sx, int sy, int zx, int zy){
+   bool ChessEngine::checkNESW(int sx, int sy, int zx, int zy){
 //First check start and end position color, if true then return false, this add as methode?
 //Catches also if the same place is tried to use (1,1) (1,1) => false
           if(isEmptySpace(board[sx][sy]) || (isW(board[sx][sy])&&isW(board[zx][zy])) || (isB(board[sx][sy])&&isB(board[zx][zy]))) //Check is there a Figure to move // check same color
@@ -112,7 +112,7 @@ bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
    };
 
    //Not finished yet
-   bool Schachspiel::checkArea(int sx, int sy, int zx, int zy){
+   bool ChessEngine::checkArea(int sx, int sy, int zx, int zy){
      //First check start and end position color, if true then return false, this add as methode? //Catches also if the same place is tried to use (1,1) (1,1) => false
      if(isEmptySpace(board[sx][sy]) || (isW(board[sx][sy])&&isW(board[zx][zy])) || (isB(board[sx][sy])&&isB(board[zx][zy]))) //Check is there a Figure to move // check same color
        return false;
@@ -139,7 +139,7 @@ bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
 	   return false;
 	}
      }
-     else if (sy-1 == zy){
+    else if (sy-1 == zy){
 	if(sx-1==zx || sx==zx ||sx+1==zx ){
 	    return true;
 	}
@@ -154,7 +154,7 @@ bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
    };
 
    //Finished
-   bool Schachspiel::checkKnight(int sx, int sy, int zx, int zy){
+   bool ChessEngine::checkKnight(int sx, int sy, int zx, int zy){
      int g[] = {2, -2};
      int ge[] = {1, -1};
 
@@ -170,7 +170,7 @@ bool Schachspiel::checkDiagonal(int sx, int sy, int zx, int zy){
      return false;
    };
    //almost finished
-   bool Schachspiel::checkPawn(int sx, int sy, int zx, int zy){
+   bool ChessEngine::checkPawn(int sx, int sy, int zx, int zy){
      //First check start and end position color, if true then return false, this add as methode?
 
      //en passant a bit complicated perhaps
