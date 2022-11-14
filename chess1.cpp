@@ -74,21 +74,23 @@ ChessSimple::ChessSimple()
 {
 	init();
 }
-void ChessSimple::execTurn(int startx,int starty, int zielx, int ziely){
-	if(isValid(startx,starty,zielx,ziely)){
-		board[zielx][ziely] = board[startx][starty];
-		if  ((startx+starty)%2)
-			board[startx][starty] = wEmpty;
+void ChessSimple::execTurn(int sx,int sy, int zx, int zy){
+  	if(isValid(sx,sy,zx,zy)){
+		player_ = player_? false:true;
+		board[zx][zy] = board[sx][sy];
+		if  ((sx+sy)%2)
+			board[sx][sy] = wEmpty;
 		else
-			board[startx][starty] = bEmpty;
+			board[sx][sy] = bEmpty;
 	}else{
+
 		cout << "invalid move" << endl;
 	}
-	checkState(); // to be decided if this should be in this function
+	//checkState(); // to be decided if this should be in this function
     return;
 }
 void ChessSimple::checkState(){
-	for(chesspiece c = wPawn; c<=bKing; c++){
+	for(short c = wPawn; c<=bKing; c++){
 		int counter = 0;
 		for(int i=0; i<8; i++){
 			for(int k=0; k<8; k++){
@@ -134,19 +136,32 @@ bool ChessSimple::isW(chesspiece a){
 }
 
 bool ChessSimple::isEmptySpace(chesspiece a){
-    if(chesspiece == wEmpty) return true;
-    if(chesspiece == bEmpty) return true;
+    if(a == wEmpty) return true;
+    if(a == bEmpty) return true;
     return false;
 }
 
 bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
     if(ChessSimple::isValid(sx,sy,zx,zy)){
 		if(isEmptySpace(board[sx][sy])) return false;
-		if(isW(board[sx][sy])^player_) return false;
+
+		if(player_){
+			if(player_ != isW(board[sx][sy])){
+				return false;
+			}
+		}
+		else{
+			if(player_ == isB(board[sx][sy]) )
+				return false;
+		}
+
+		//if(isW(board[sx][sy])^player_) return false;
 	// Use of XOR in parentheses. Statement is true when the color of the chesspiece doesnt match the player
 	// Notice that this statement can also be false if the chesspiece was empty
 	// Therefore you have to first make sure that the chesspiece isnt an empty space
+
 		if(isW(board[zx][zy])!= player_ || isB(board[zx][zy]) == player_){
+
 			switch(board[sx][sy]){
 				case wPawn: case bPawn:	return checkPawn( sx,  sy,  zx,  zy);
 					break;
@@ -154,7 +169,7 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 					break;
 				case wBishop: case bBishop: return checkDiagonal( sx,  sy,  zx,  zy);
 					break;
-				case wKnight: case bKnight': return checkKnight( sx,  sy,  zx,  zy);
+				case wKnight: case bKnight: return checkKnight( sx,  sy,  zx,  zy);
 					break;
 				case wQueen: case bQueen:	return(checkDiagonal( sx,  sy,  zx,  zy)||checkNESW( sx,  sy,  zx,  zy));
 					break;
@@ -163,15 +178,16 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 				default: throw(string("ERROR"));
 					break;
 			}
+
 		}
 	}
 	return false;
 }
 
-void ChessEngine::execTurn(int startx, int starty, int zielx, int ziely){
-	if (board[zielx][ziely]== wKing) throw string("Spieler2 hat gewonnen.");
-	if (board[zielx][ziely]== wKing) throw string("Spieler1 hat gewonnen.");
-	ChessSimple::execTurn(startx, starty, zielx, ziely);
+void ChessEngine::execTurn(int sx, int sy, int zx, int zy){
+	if (board[zx][zy]== wKing) throw string("Spieler2 hat gewonnen.");
+	if (board[zx][zy]== wKing) throw string("Spieler1 hat gewonnen.");
+	ChessSimple::execTurn(sx, sy, zx, zy);
 	return;
 }
 //void ChessEngine::run(){
