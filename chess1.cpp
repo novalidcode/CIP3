@@ -76,7 +76,6 @@ ChessSimple::ChessSimple()
 }
 void ChessSimple::execTurn(int sx,int sy, int zx, int zy){
   	if(isValid(sx,sy,zx,zy)){
-		player_ = player_? false:true;
 		board[zx][zy] = board[sx][sy];
 		if  ((sx+sy)%2)
 			board[sx][sy] = wEmpty;
@@ -90,7 +89,7 @@ void ChessSimple::execTurn(int sx,int sy, int zx, int zy){
     return;
 }
 void ChessSimple::checkState(){
-	for(short c = wPawn; c<=bKing; c++){
+	for(chesspiece c = wPawn; c<=bKing; c++){
 		int counter = 0;
 		for(int i=0; i<8; i++){
 			for(int k=0; k<8; k++){
@@ -155,7 +154,6 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 				return false;
 		}
 
-		//if(isW(board[sx][sy])^player_) return false;
 	// Use of XOR in parentheses. Statement is true when the color of the chesspiece doesnt match the player
 	// Notice that this statement can also be false if the chesspiece was empty
 	// Therefore you have to first make sure that the chesspiece isnt an empty space

@@ -151,8 +151,10 @@ bool ChessEngine::checkPawn(int sx, int sy, int zx, int zy)
     //en passant a bit complicated perhaps
 	/*
     bool playerW = isW(board[sx][sy]);
-    bool notmoved = ((playerW && sy == 1) || (!playerW && sy == 6));
+	bool playerB = isB(board[sx][sy]);
+    bool notmoved = ((playerW && sy == 1) || (playerB && sy == 6));
     int distance = zy - sy;
+			
     int direction = 1;
     playerW ? direction = 1 : direction = -1;
     //playerW? direction *=1 : direction *=-1;

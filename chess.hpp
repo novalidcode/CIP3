@@ -139,15 +139,6 @@ public:
 	 *
 	 *
 	 */
-    virtual void setState(string state) = 0;
-    /**
-	 *
-	 * \brief check if the figure is white
-	 *
-	 * \param a chesspiece
-	 *
-	 * \return true when it's a white figure
-	 *
 	 */
     virtual bool isW(chesspiece a) = 0;
     /**
@@ -198,8 +189,9 @@ protected:
 	 */
     char convert(chesspiece a);
 
-    chesspiece getPiece(int x, int y);
 public:
+	
+    chesspiece getPiece(int x, int y);
     /**
 	 *
 	 * \brief constructor
@@ -264,7 +256,7 @@ class ChessEngine : public ChessSimple
 {
 protected:
 
-
+	bool player_ = PLAYER1;
 // Die folgenden Funktionen Testen jeweils ob sich das zfeld mithilfe
 // der jeweiligen Zugoptionen erreichen laesst.
 // Dabei muss darauf geachtet werden ob moeglicherweise eine Figur im Weg zum zfeld steht.
@@ -278,7 +270,7 @@ protected:
 
 
 public:
-    ChessEngine() {};
+    ChessEngine() : ChessSimple(){};
     bool isValid(int sx, int sy, int zx, int zy);
 // Hier wird erst geprueft ob board[sx][sy] eine Figur ist und ob sie von dem jeweiligen
 // Spieler bewegt werden darf.
@@ -384,7 +376,7 @@ public:
    	 * \brief constructor
    	 *
    	 */
-    ChessSpecial()
+    ChessSpecial() : ChessEngine()
     {
         init();
         enpassant_ =0;
@@ -399,14 +391,10 @@ public:
             bCC_[i]=true;
         enpassant_=0;
     };
-    void setState(string state)
-    {
-        sState_ =state;;
-    };
     chesspiece getPiece(int x, int y)
     {
         return board[x][y];
-    };;
+    };
     bool isValid(int sx, int sy,int zx, int zy);
 
 
