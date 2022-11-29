@@ -75,21 +75,12 @@ ChessSimple::ChessSimple()
 	init();
 }
 void ChessSimple::execTurn(int sx,int sy, int zx, int zy){
-  	if(isValid(sx,sy,zx,zy)){
-		board[zx][zy] = board[sx][sy];
-		if  ((sx+sy)%2)
-			board[sx][sy] = wEmpty;
-		else
-			board[sx][sy] = bEmpty;
-	}else{
 
-		cout << "invalid move" << endl;
-	}
 	//checkState(); // to be decided if this should be in this function
     return;
 }
 void ChessSimple::checkState(){
-	for(chesspiece c = wPawn; c<=bKing; c++){
+	for(short c = wPawn; c<=bKing; c++){
 		int counter = 0;
 		for(int i=0; i<8; i++){
 			for(int k=0; k<8; k++){
@@ -185,7 +176,20 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 void ChessEngine::execTurn(int sx, int sy, int zx, int zy){
 	if (board[zx][zy]== wKing) throw string("Spieler2 hat gewonnen.");
 	if (board[zx][zy]== wKing) throw string("Spieler1 hat gewonnen.");
-	ChessSimple::execTurn(sx, sy, zx, zy);
+	if(isValid(sx,sy,zx,zy)){
+
+		player_=!player_;
+			board[zx][zy] = board[sx][sy];
+			if  ((sx+sy)%2)
+				board[sx][sy] = wEmpty;
+			else
+				board[sx][sy] = bEmpty;
+		}else{
+
+			cout << "invalid move" << endl;
+		}
+
+
 	return;
 }
 //void ChessEngine::run(){

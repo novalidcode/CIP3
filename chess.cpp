@@ -119,8 +119,16 @@ bool ChessEngine::checkArea(int sx, int sy, int zx, int zy)
     //Still Missing
     //bool checkPosAttacked?(zx,zy){ knight?, Pawn near?  Rook? Bishop? (Queen)? } //King && King 1 empty Field betweeen
     //castling methode? member Array bool moved_[6] of 6 bool values for , R K R, R K R
+	if(abs(sx -zx)<2 && abs(sy -zy)<2)
+	    {
 
-    return true;
+	        return true;
+	    }
+	    else
+	    {
+	        return false;
+	    }
+    //return true;
 
 }
 ;

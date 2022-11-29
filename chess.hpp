@@ -139,7 +139,7 @@ public:
 	 *
 	 *
 	 */
-	 */
+
     virtual bool isW(chesspiece a) = 0;
     /**
 	 *
@@ -261,11 +261,11 @@ protected:
 // der jeweiligen Zugoptionen erreichen laesst.
 // Dabei muss darauf geachtet werden ob moeglicherweise eine Figur im Weg zum zfeld steht.
 
-    bool checkDiagonal(int sx, int sy, int zx, int zy);
-    bool checkNESW(int sx, int sy, int zx, int zy);
-    bool checkArea(int sx, int sy, int zx, int zy);
-    bool checkKnight(int sx, int sy, int zx, int zy);
-    bool checkPawn(int sx, int sy, int zx, int zy);
+    virtual bool checkDiagonal(int sx, int sy, int zx, int zy);
+    virtual bool checkNESW(int sx, int sy, int zx, int zy);
+    virtual bool checkArea(int sx, int sy, int zx, int zy);
+    virtual bool checkKnight(int sx, int sy, int zx, int zy);
+    virtual bool checkPawn(int sx, int sy, int zx, int zy);
 
 
 
