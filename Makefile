@@ -53,3 +53,5 @@ all:	$(DEMOTARGET)
 run:	main	
 	./main
 
+runs:  server
+	./server

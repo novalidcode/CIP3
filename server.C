@@ -19,8 +19,37 @@
 #include "SIMPLESOCKET.H"
 
 
+class SimpleServer : public TCPserver{
+public:
+
+	SimpleServer(int port, int length): TCPserver(port, length){;};
+protected:
+	string myResponse(string input);
+
+};
+
+string SimpleServer::myResponse(string input){
+
+
+	if(input.compare(0,4,"init") == 0){
+		return string("Init Okay");
+	}
+	else if(input.compare(0,4,"hash") == 0){
+			return string("hash Okay");
+	}
+	else if(input.compare(0,5,"xturn") == 0){
+				return string("execute Turn Okay");
+		}
+	else if(input.compare(0,5,"gturn") == 0){
+			return string("getTurn Okay");
+	}
+	return string("Unknown Command");
+}
+
+
+
 int main(){
 	srand(time(nullptr));
-	TCPserver srv(2022,25);
+	SimpleServer srv(2022,25);
 	srv.run();
 }
