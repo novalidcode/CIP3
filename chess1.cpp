@@ -1,4 +1,5 @@
 #include "chess.hpp"
+#include "SHA256.H"
 #include <iostream>
 
 void ChessSimple::init(){
@@ -192,34 +193,14 @@ void ChessEngine::execTurn(int sx, int sy, int zx, int zy){
 
 	return;
 }
-//void ChessEngine::run(){
-//	int sy,zy;
-//	char sx,zx;	
-//	while(1){
-//		do{
-//			cout << "Eingabe Startkoordinaten:";
-//			
-//			cin >> sx >> sy;
-//			if(cin.fail()){
-//				cin.clear();
-//				cout << "FEHLER" << endl;
-//				cin.ignore(1000,'\n');
-//				continue;
-//			}
-//
-//			cout << "Eingabe Zielkoordinaten:";
-//			cin >> zx >> zy;
-//			if(cin.fail()){
-//				cin.clear();
-//				cout << "FEHLER" << endl;
-//				cin.ignore(1000,'\n');
-//				continue;
-//			}
-//			if(!isValid(((int)sx)-61,sy-1,((int)zx)-61,zy-1))
-//				cout << "ungültiger Zug" << endl;
-//		}while(!isValid(((int)sx)-61,sy-1,((int)zx)-61,zy-1));
-//		execTurn(((int)sx)-61,sy-1,((int)zx)-61,zy-1);
-//	}
-//	return;
-//}	
-//test
+
+
+std::string ChessSpecial::getState(){
+	std::string state;
+	int i;
+	for(i=0;i<64;i++){
+		state += convert(board[i%8][i/8]);
+	std::string hash = sha256(state);
+	}
+	return(hash);
+}

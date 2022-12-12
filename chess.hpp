@@ -294,7 +294,7 @@ class ChessSpecial : public ChessEngine
 {
 protected:
     bool bCC_[6];	//CastlingCheck 0 2 3 5 => Rook
-    string sState_;
+    //string sState_; //to be determined if used
     int enpassant_;
     //pos and color which should get checked
     //check if the Field is attacked
@@ -381,7 +381,7 @@ public:
         init();
         enpassant_ =0;
     };
-    string getState(){return sState_;};
+    string getState();
     void init()
     {
 		ChessEngine::init();
