@@ -381,12 +381,10 @@ public:
         init();
         enpassant_ =0;
     };
-    string getState()
-    {
-        return sState_;
-    };
+    string getState();
     void init()
     {
+		ChessEngine::init();
         for(int i=0; i<6; i++)
             bCC_[i]=true;
         enpassant_=0;
