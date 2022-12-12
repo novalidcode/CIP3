@@ -381,7 +381,7 @@ public:
         init();
         enpassant_ =0;
     };
-    string getState();
+    string getState(){return sState_;};
     void init()
     {
 		ChessEngine::init();
