@@ -17,13 +17,21 @@
 #include <netinet/in.h> //contains constants and structures needed for internet domain addresses
 
 #include "SIMPLESOCKET.H"
-
+#include "chess.hpp"
+#include "SHA256.H"
 
 class SimpleServer : public TCPserver{
 public:
 
-	SimpleServer(int port, int length): TCPserver(port, length){;};
+	SimpleServer(int port, int length): TCPserver(port, length){
+		chess = new ChessSpecial();	
+	};
+	~SimpleServer(){
+		if(chess!=nullptr)
+			delete chess;
+	}
 protected:
+	IChess* chess;
 	string myResponse(string input);
 
 };
@@ -31,16 +39,24 @@ protected:
 string SimpleServer::myResponse(string input){
 
 
-	if(input.compare(0,4,"init") == 0){
+	if(input.compare(0,4,"INIT") == 0){
+		chess->init();
 		return string("Init Okay");
 	}
-	else if(input.compare(0,4,"hash") == 0){
-		return string("hash Okay");
+	else if(input.compare(0,4,"HASH") == 0){
+		string state = chess->getState();
+		return state;
 	}
-	else if(input.compare(0,5,"xturn") == 0){
-		return string("execute Turn Okay");
+	else if(input.compare(0,4,"EXEC") == 0){ 
+		if(input.length()>=8){
+			if(chess->isValid(input[4]-'a',input[5]-'1',input[6]-'a',input[7]-'1')){
+				chess->execTurn(input[4]-'a',input[5]-'1',input[6]-'a',input[7]-'1');
+				return string("execute Turn Okay");
+			}
+		}
+		return string("ERROR");
 	}
-	else if(input.compare(0,5,"gturn") == 0){
+	else if(input.compare(0,8,"GET_TURN") == 0){
 		return string("getTurn Okay");
 	}
 	return string("Unknown Command");

@@ -1,7 +1,7 @@
 CC=g++
 
-CFLAGS=$(shell pkg-config --cflags opencv) 
-LIBS=$(shell pkg-config --libs opencv) 
+#CFLAGS=$(shell pkg-config --cflags opencv) 
+#LIBS=$(shell pkg-config --libs opencv) 
 
 OBJS= main.o  chess.o chess1.o SHA256.o SIMPLESOCKET.o
 DEMOTARGET=main server client
@@ -35,7 +35,7 @@ main:	$(OBJS)
 
 
 server:	server.o
-	$(CC) -o server server.o  SIMPLESOCKET.o -L/usr/lib/x86_64-linux-gnu -ldl -lstdc++  -std=c++11
+	$(CC) -o server server.o  SIMPLESOCKET.o chess.o chess1.o SHA256.o -L/usr/lib/x86_64-linux-gnu -ldl -lstdc++  -std=c++11
 
 client:	client.o
 	$(CC) -o client client.o SIMPLESOCKET.o -L/usr/lib/x86_64-linux-gnu -ldl -lstdc++  -std=c++11
