@@ -35,13 +35,13 @@ string SimpleServer::myResponse(string input){
 		return string("Init Okay");
 	}
 	else if(input.compare(0,4,"hash") == 0){
-			return string("hash Okay");
+		return string("hash Okay");
 	}
 	else if(input.compare(0,5,"xturn") == 0){
-				return string("execute Turn Okay");
-		}
+		return string("execute Turn Okay");
+	}
 	else if(input.compare(0,5,"gturn") == 0){
-			return string("getTurn Okay");
+		return string("getTurn Okay");
 	}
 	return string("Unknown Command");
 }

@@ -196,11 +196,11 @@ void ChessEngine::execTurn(int sx, int sy, int zx, int zy){
 
 
 std::string ChessSpecial::getState(){
-	std::string state;
+	std::string state("");
 	int i;
 	for(i=0;i<64;i++){
 		state += convert(board[i%8][i/8]);
-	std::string hash = sha256(state);
 	}
+	std::string hash = sha256(state);
 	return(hash);
 }
