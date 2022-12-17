@@ -132,6 +132,11 @@ bool ChessSimple::isEmptySpace(chesspiece a){
     return false;
 }
 
+void ChessEngine::init(){
+	ChessSimple::init();
+	player_ = PLAYER1;
+}
+
 bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
     if(ChessSimple::isValid(sx,sy,zx,zy)){
 		if(isEmptySpace(board[sx][sy])) return false;
@@ -168,8 +173,9 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 				default: throw(string("ERROR"));
 					break;
 			}
-
+		
 		}
+		//cout << "false destination coordinates" << endl;
 	}
 	return false;
 }

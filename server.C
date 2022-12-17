@@ -57,7 +57,39 @@ string SimpleServer::myResponse(string input){
 		return string("ERROR");
 	}
 	else if(input.compare(0,8,"GET_TURN") == 0){
-		return string("getTurn Okay");
+		string coords("");
+		char sx,zx;
+		int sy,zy;
+
+		chess->print();
+
+		do{
+			cout << "Input start coordinates:";
+			
+			cin >> sx >> sy;
+			//cout << sx << " " << sy << endl;
+			if(cin.fail()){
+				cin.clear();
+				cout << "ERROR" << endl;
+				cin.ignore(1000,'\n');
+				continue;
+			}
+
+			cout << "Input destination coordinates:";
+			cin >> zx >> zy;
+			//cout << zx << " " << zy << endl;
+			if(cin.fail()){
+				cin.clear();
+				cout << "ERROR" << endl;
+				cin.ignore(1000,'\n');
+				continue;
+			}
+
+		}while(!chess->isValid(sx-'a',sy-1,zx-'a',zy-1));
+		chess->execTurn(sx-'a',sy-1,zx-'a',zy-1);
+
+		coords = ((((coords + sx)+(char)(48+sy))+zx)+(char)(48+zy)); 
+		return string("GTRN")+coords;
 	}
 	return string("Unknown Command");
 }

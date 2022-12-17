@@ -102,7 +102,7 @@ public:
     virtual bool isValid(int sx, int sy, int zx, int zy) = 0;
     /**
 	 *
-	 * \brief initial the board
+	 * \brief initialize the board
 	 *
 	 */
     virtual void init() = 0;
@@ -271,6 +271,7 @@ protected:
 
 public:
     ChessEngine() : ChessSimple(){};
+	void init();
     bool isValid(int sx, int sy, int zx, int zy);
 // Hier wird erst geprueft ob board[sx][sy] eine Figur ist und ob sie von dem jeweiligen
 // Spieler bewegt werden darf.

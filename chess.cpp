@@ -515,15 +515,17 @@ bool ChessSpecial::isValid(int sx, int sy, int zx, int zy)
     {
         if(board[sx][sy]==wKing || board[sx][sy]==bKing)
         {
+			//cout << "checking area..." << endl;
             return checkArea(sx, sy, zx, zy);
         }
         else if(board[sx][sy]==wPawn || board[sx][sy]==bPawn)
                 {
+					//cout << "checking if enpassant..." << endl;
                     return checkPawn(sx, sy, zx, zy);
                 }
         return true;
     }
-
+	//cout << "ChessEngine::isValid(..) returned false" << endl;
     return false;
 }
 
