@@ -49,144 +49,143 @@ enum chesspiece : short
 
 };
 
-/**
- *
- * \class IChess
- *
- *	\brief Interface class for ChessSimple ChessEngine ChessSpecial.
- *
- */
+///
+///
+///\class IChess
+///
+/// \brief Interface class for ChessSimple ChessEngine ChessSpecial.
+///
+///
 
 class IChess
 {
 public:
-    /**
-	 *
-	 * \brief get Piece of the board
-	 *
-	 * \param x int pos x of the board
-	 *
-	 * \param y int pos y of the board
-	 *
-	 * \return chesspiece
-	 *
-	 */
+	
+///
+///
+///\brief get Piece of the board
+///
+///\param x int pos x of the board
+///
+///\param y int pos y of the board
+///
+///\return chesspiece
+///
+///
     virtual chesspiece getPiece(int x, int y) = 0;
-    /**
-	 *
-	 * \brief output the board
-	 *
-	 */
+	
+///
+///\brief output the board
+///
+///
     virtual void print() = 0;
-    /**
-	 *
-	 * \brief checkState of the board
-	 *
-	 */
+	
+///
+///
+///\brief checkState of the board
+///
+///
     virtual void checkState() = 0;
-    /**
-	 *
-	 * \brief is the turn valid
-	 *
-	 * \param sx int XPos of the Figure
-	 *
-	 * \param sy int YPos of the Figure
-	 *
-	 * \param zx int XPos of move Pos
-	 *
-	 * \param zy int YPos of move Pos
-	 *
-	 * \return true when the move is valid
-	 *
-	 */
+	
+///
+///
+/// \brief is the turn valid
+///
+/// \param sx int XPos of the Figure
+///
+/// \param sy int YPos of the Figure
+///
+/// \param zx int XPos of move Pos
+///
+/// \param zy int YPos of move Pos
+///
+/// \return true when the move is valid
+///
     virtual bool isValid(int sx, int sy, int zx, int zy) = 0;
-    /**
-	 *
-	 * \brief initialize the board
-	 *
-	 */
+///
+///
+/// \brief initialize the board
+///
+////
     virtual void init() = 0;
-    /**
-	 *
-	 * \brief execute the Turn of the player
-	 *
-	 * \param sx int XPos of the Figure
-	 *
-	 * \param sy int YPos of the Figure
-	 *
-	 * \param zx int XPos of move Pos
-	 *
-	 * \param zy int YPos of move Pos
-	 *
-	 *
-	 */
+///
+///
+/// \brief execute the Turn of the player
+///
+/// \param sx int XPos of the Figure
+///
+/// \param sy int YPos of the Figure
+///
+/// \param zx int XPos of move Pos
+///
+/// \param zy int YPos of move Pos
+///
+///
+///
     virtual void execTurn(int sx, int sy, int zx, int zy) = 0;
-    /**
-	 *
-	 * \brief return the board or the turn as string
-	 *
-	 *
-	 * \return string
-	 *
-	 *
-	 */
+///
+///
+/// \brief return the board or the turn as string
+///
+///
+/// \return string
+///
+///
+///
     virtual string getState() = 0;
-    /**
-	 *
-	 * \brief set the current state of the string
-	 *
-	 * \param state string
-	 *
-	 *
-	 */
-
+///
+/// \brief check if chesspiece is white
+///
+/// \param a chesspiece
+///
+/// \return true if piece is white, false otherwise
+////
     virtual bool isW(chesspiece a) = 0;
-    /**
-	 *
-	 * \brief check if the figure is  black
-	 *
-	 * \param a chesspiece
-	 *
-	 * \return true when it's a black figure
-	 *
-	 */
+///
+///
+/// \brief check if the figure is  black
+///
+/// \param a chesspiece
+///
+/// \return true when it's a black figure
+///
+///
     virtual bool isB(chesspiece a) = 0;
-    /**
-	 *
-	 * \brief check if the chesspiece is Empty
-	 *
-	 * \param a chesspiece
-	 *
-	 * \return true when it's empty
-	 *
-	 */
+///
+///
+/// \brief check if the chesspiece is Empty
+///
+/// \param a chesspiece
+///
+/// \return true when it's empty
+///
+///
     virtual bool isEmptySpace(chesspiece a) = 0;
 };
 
 
-/**
- *
- * \class ChessSimple
- *
- *	\brief Abstract Class Simple inherit IChess
- *
- */
+///
+///
+///\class ChessSimple
+///
+/// \brief Abstract Class Simple inherit IChess
+///
+///
 
 class ChessSimple : public IChess
 {
 
 protected:
-    bool player_ = PLAYER1;
     chesspiece board[8][8];
-    /**
-	 *
-	 * \brief convert chesspiece to char
-	 *
-	 * \param a chesspiece
-	 *
-	 * \return char coverted chesspiece
-	 *
-	 */
+///
+///
+///\brief convert chesspiece to char
+///
+///\param a chesspiece
+///
+///\return char coverted chesspiece
+///
+///
     char convert(chesspiece a);
 
 public:
@@ -199,8 +198,6 @@ public:
 	 */
     ChessSimple();
 // Fuellt das 2-dimensionale Feld sodass es dem Ausgangspunkt des Spiels entspricht.
-    //void setState(string a){throw ("Not implemented yet");};
-    //string getState(){throw ("Not implemented yet");return 0;};
 
     void init();
     void print();
@@ -245,13 +242,13 @@ public:
 
 };
 
-/**
- *
- * \class ChessEngine
- *
- *	\brief Abstract Class ChessEngine inherit ChessSimple
- *
- */
+///
+///
+///\class ChessEngine
+///
+/// \brief Abstract Class ChessEngine inherit ChessSimple
+///
+///
 class ChessEngine : public ChessSimple
 {
 protected:
@@ -260,7 +257,16 @@ protected:
 // Die folgenden Funktionen Testen jeweils ob sich das zfeld mithilfe
 // der jeweiligen Zugoptionen erreichen laesst.
 // Dabei muss darauf geachtet werden ob moeglicherweise eine Figur im Weg zum zfeld steht.
-
+///
+/// \brief check method for bishop
+/// \param sx int X-Pos figure
+///
+/// \param sy int Y-Pos figure
+///
+/// \param zx int X-Pos move to
+///
+/// \param zy int Y-Pos move to
+/// \return true if destination can be reached with diagonal movement
     virtual bool checkDiagonal(int sx, int sy, int zx, int zy);
     virtual bool checkNESW(int sx, int sy, int zx, int zy);
     virtual bool checkArea(int sx, int sy, int zx, int zy);
