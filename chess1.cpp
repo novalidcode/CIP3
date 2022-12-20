@@ -76,8 +76,21 @@ ChessSimple::ChessSimple()
 	init();
 }
 void ChessSimple::execTurn(int sx,int sy, int zx, int zy){
+	checkState();
+	if(isValid(sx,sy,zx,zy)){
+		board[zx][zy] = board[sx][sy];
+		if  ((sx+sy)%2)
+			board[sx][sy] = wEmpty;
+		else
+			board[sx][sy] = bEmpty;
 
-	//checkState(); // to be decided if this should be in this function
+		//if (board[zx][zy]== wKing) throw string("Spieler2 hat gewonnen.");
+		//if (board[zx][zy]== wKing) throw string("Spieler1 hat gewonnen.");
+	}else{
+
+		cout << "invalid move" << endl;
+	}
+
     return;
 }
 void ChessSimple::checkState(){
@@ -138,7 +151,7 @@ void ChessEngine::init(){
 }
 
 bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
-    if(ChessSimple::isValid(sx,sy,zx,zy)){
+    //if(ChessSimple::isValid(sx,sy,zx,zy)){
 		if(isEmptySpace(board[sx][sy])) return false;
 
 		if(player_){
@@ -150,10 +163,6 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 			if(player_ == isB(board[sx][sy]) )
 				return false;
 		}
-
-	// Use of XOR in parentheses. Statement is true when the color of the chesspiece doesnt match the player
-	// Notice that this statement can also be false if the chesspiece was empty
-	// Therefore you have to first make sure that the chesspiece isnt an empty space
 
 		if(isW(board[zx][zy])!= player_ || isB(board[zx][zy]) == player_){
 
@@ -176,26 +185,16 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 		
 		}
 		//cout << "false destination coordinates" << endl;
-	}
+	//}
 	return false;
 }
 
 void ChessEngine::execTurn(int sx, int sy, int zx, int zy){
-	if (board[zx][zy]== wKing) throw string("Spieler2 hat gewonnen.");
-	if (board[zx][zy]== wKing) throw string("Spieler1 hat gewonnen.");
 	if(isValid(sx,sy,zx,zy)){
-
-		player_=!player_;
-			board[zx][zy] = board[sx][sy];
-			if  ((sx+sy)%2)
-				board[sx][sy] = wEmpty;
-			else
-				board[sx][sy] = bEmpty;
-		}else{
-
-			cout << "invalid move" << endl;
-		}
-
+		ChessSimple::execTurn(sx,sy,zx,zy);
+	}else{
+		cout << "invalid move" << endl;
+	}
 
 	return;
 }

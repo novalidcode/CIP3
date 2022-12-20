@@ -88,7 +88,7 @@ string SimpleServer::myResponse(string input){
 		}while(!chess->isValid(sx-'a',sy-1,zx-'a',zy-1));
 		chess->execTurn(sx-'a',sy-1,zx-'a',zy-1);
 
-		coords = ((((coords + sx)+(char)(48+sy))+zx)+(char)(48+zy)); 
+		coords = ((((coords + sx)+(char)('0'+sy))+zx)+(char)('0'+zy)); 
 		return string("GTRN")+coords;
 	}
 	return string("Unknown Command");
