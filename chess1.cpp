@@ -77,7 +77,7 @@ ChessSimple::ChessSimple()
 }
 void ChessSimple::execTurn(int sx,int sy, int zx, int zy){
 	checkState();
-	if(isValid(sx,sy,zx,zy)){
+	if(ChessSimple::isValid(sx,sy,zx,zy)){
 		board[zx][zy] = board[sx][sy];
 		if  ((sx+sy)%2)
 			board[sx][sy] = wEmpty;
@@ -151,7 +151,7 @@ void ChessEngine::init(){
 }
 
 bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
-    //if(ChessSimple::isValid(sx,sy,zx,zy)){
+    if(ChessSimple::isValid(sx,sy,zx,zy)){
 		if(isEmptySpace(board[sx][sy])) return false;
 
 		if(player_){
@@ -185,13 +185,16 @@ bool ChessEngine::isValid(int sx, int sy, int zx, int zy){
 		
 		}
 		//cout << "false destination coordinates" << endl;
-	//}
+	}
 	return false;
 }
 
 void ChessEngine::execTurn(int sx, int sy, int zx, int zy){
 	if(isValid(sx,sy,zx,zy)){
+		if (board[zx][zy]== wKing) throw string("Spieler2 hat gewonnen.");
+		if (board[zx][zy]== wKing) throw string("Spieler1 hat gewonnen.");
 		ChessSimple::execTurn(sx,sy,zx,zy);
+		player_ = !player_;
 	}else{
 		cout << "invalid move" << endl;
 	}
@@ -207,5 +210,6 @@ std::string ChessSpecial::getState(){
 		state += convert(board[i%8][i/8]);
 	}
 	std::string hash = sha256(state);
+	cout << hash << endl;
 	return(hash);
 }

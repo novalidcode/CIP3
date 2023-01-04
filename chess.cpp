@@ -486,7 +486,7 @@ bool ChessSpecial::isFieldAttacked(int fx, int fy, bool color)
 bool ChessSpecial::isValid(int sx, int sy, int zx, int zy)
 {
 	//Check if King is check && mate
-
+	//cout << "currently in ChessSpecial::isValid()" << endl;
 
 		for(int i=0;i<8; i++){
 			for(int j=0;j < 8; j++){

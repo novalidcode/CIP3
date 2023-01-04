@@ -41,7 +41,7 @@ string SimpleServer::myResponse(string input){
 
 	if(input.compare(0,4,"INIT") == 0){
 		chess->init();
-		return string("Init Okay");
+		return string("OK");
 	}
 	else if(input.compare(0,4,"HASH") == 0){
 		string state = chess->getState();
@@ -51,7 +51,8 @@ string SimpleServer::myResponse(string input){
 		if(input.length()>=8){
 			if(chess->isValid(input[4]-'a',input[5]-'1',input[6]-'a',input[7]-'1')){
 				chess->execTurn(input[4]-'a',input[5]-'1',input[6]-'a',input[7]-'1');
-				return string("execute Turn Okay");
+				chess->print();
+				return string("OK");
 			}
 		}
 		return string("ERROR");
@@ -89,7 +90,7 @@ string SimpleServer::myResponse(string input){
 		chess->execTurn(sx-'a',sy-1,zx-'a',zy-1);
 
 		coords = ((((coords + sx)+(char)('0'+sy))+zx)+(char)('0'+zy)); 
-		return string("GTRN")+coords;
+		return coords;
 	}
 	return string("Unknown Command");
 }
