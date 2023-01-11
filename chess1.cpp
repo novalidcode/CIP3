@@ -210,6 +210,6 @@ std::string ChessSpecial::getState(){
 		state += convert(board[i%8][i/8]);
 	}
 	std::string hash = sha256(state);
-	cout << hash << endl;
+//	cout << hash << endl;
 	return(hash);
 }

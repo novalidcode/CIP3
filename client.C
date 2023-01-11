@@ -46,9 +46,8 @@ int main() {
 		while(goOn){
 			string cstate = game->getState();
 			c.sendData(string("HASH"));
-			msg = c.receive(64);
+			msg = c.receive(128);
 
-			cout <<"msg =" <<  msg << endl;
 			if(cstate.compare(msg) != 0){
 				cout << "chessboard desync... restarting game." << endl;
 				break;
