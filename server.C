@@ -99,6 +99,6 @@ string SimpleServer::myResponse(string input){
 
 int main(){
 	srand(time(nullptr));
-	SimpleServer srv(2022,25);
+	SimpleServer srv(2022,64);
 	srv.run();
 }
